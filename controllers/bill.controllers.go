@@ -56,10 +56,8 @@ func EditBill(c echo.Context) error {
 	isSettled := c.FormValue("isSettled")
 	date_created := c.FormValue("date_created")
 	payment_id := c.FormValue("payment_id")
-	debtorbill_id := c.FormValue("debtorbill_id")
 	user_id := c.FormValue("user_id")
-
-	result, err := models.EditBill(id, receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, debtorbill_id, user_id)
+	result, err := models.EditBill(id, receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, user_id)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError,
@@ -80,9 +78,8 @@ func CreateBill(c echo.Context) error {
 	isSettled := c.FormValue("isSettled")
 	date_created := c.FormValue("date_created")
 	payment_id := c.FormValue("payment_id")
-	debtorbill_id := c.FormValue("debtorbill_id")
 	user_id := c.FormValue("user_id")
-	result, err := models.CreateBill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, debtorbill_id, user_id)
+	result, err := models.CreateBill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, user_id)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError,
