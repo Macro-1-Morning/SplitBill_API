@@ -57,7 +57,9 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 	}
 
 	con := db.CreateCon()
-	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+
+	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, debtorbill_id, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"
+
 	stmt, err := con.Prepare(sqlStatement)
 
 	if err != nil {
@@ -70,6 +72,7 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 	}
 
 	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id)
+
 	if err != nil {
 		return res, err
 	}
@@ -128,6 +131,7 @@ func EditBill(id string, receipt_image string, restaurant_name string, subtotal 
 	}
 
 	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id, id)
+
 	if err != nil {
 		return res, err
 	}
@@ -163,6 +167,7 @@ func ReadAllBill(id string)(Response, error){
  
 	for rows.Next(){
 		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Date_Created, &obj.Payment_Id, &obj.User_Id)
+
 		if err != nil{
 			return res,err
 		}
@@ -190,6 +195,7 @@ func ReadBillByBillId(id string)(Response, error){
 	}
 	for rows.Next(){
 		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Date_Created, &obj.Payment_Id, &obj.User_Id)
+
 		if err != nil{
 			return res,err
 		}

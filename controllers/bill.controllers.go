@@ -57,7 +57,6 @@ func EditBill(c echo.Context) error {
 	date_created := c.FormValue("date_created")
 	payment_id := c.FormValue("payment_id")
 	user_id := c.FormValue("user_id")
-
 	result, err := models.EditBill(id, receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, user_id)
 
 	if err != nil {
