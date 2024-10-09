@@ -20,6 +20,12 @@ func Init() *echo.Echo {
 	e.PATCH("/editBill", controllers.EditBill)
 	e.DELETE("/deleteBill", controllers.DeleteBill)
 
+	//Debtor Bill
+	e.GET("/getDebtorBill", controllers.ReadDebtorBill)
+	e.POST("/createDebtorBill", controllers.CreateDebtorBill)
+	e.PATCH("/editDebtorBill", controllers.EditDebtorBill)
+	e.DELETE("/deleteDebtorBill", controllers.DeleteDebtorBill)
+
 	return e
 
 }
