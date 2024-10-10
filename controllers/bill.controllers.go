@@ -70,7 +70,6 @@ func EditBill(c echo.Context) error {
 }
 
 func CreateBill(c echo.Context) error {
-	// receipt_image := c.FormValue("receipt_image")
 	receipt_image, err := c.FormFile("receipt_image")
 	restaurant_name := c.FormValue("restaurant_name")
 	subtotal := c.FormValue("subtotal")
@@ -90,17 +89,14 @@ func CreateBill(c echo.Context) error {
 		})
 	}
 
-	// Define the file path to save the uploaded image.
-	pathImage := "/Users/marshalikorawung/SplitBill_API/images/" + receipt_image.Filename
+	pathImage := "./images/" + receipt_image.Filename
 
-	// Save the uploaded file to the specified path.
 	if err := saveUploadedFile(receipt_image, pathImage); err != nil {
 		return c.JSON(http.StatusInternalServerError, &models.Response{
 			Message: "An internal server error occurred when saving the image. Please try again in a few moments!",
 		})
 	}
 
-	// Construct the URL for the saved picture.
 	baseURL := "http://127.0.0.1:8080"
 	pictureURL := baseURL + "/images/" + receipt_image.Filename
 
@@ -113,23 +109,19 @@ func CreateBill(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
-// saveUploadedFile function to handle file uploads.
 func saveUploadedFile(file *multipart.FileHeader, path string) error {
-	// Open the uploaded file.
 	src, err := file.Open()
 	if err != nil {
 		return err
 	}
 	defer src.Close()
 
-	// Create a destination file for the uploaded content.
 	dst, err := os.Create(path)
 	if err != nil {
 		return err
 	}
 	defer dst.Close()
 
-	// Copy the uploaded content to the destination file.
 	if _, err = io.Copy(dst, src); err != nil {
 		return err
 	}
