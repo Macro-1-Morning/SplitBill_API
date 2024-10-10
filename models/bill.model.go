@@ -58,7 +58,7 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 
 	con := db.CreateCon()
 
-	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, debtorbill_id, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"
+	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
 
 	stmt, err := con.Prepare(sqlStatement)
 

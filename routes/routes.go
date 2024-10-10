@@ -19,6 +19,14 @@ func Init() *echo.Echo {
 	e.POST("/createBill", controllers.CreateBill)
 	e.PATCH("/editBill", controllers.EditBill)
 	e.DELETE("/deleteBill", controllers.DeleteBill)
+	// Serve static files (profile pictures) from the 'picture' directory.
+    e.Static("/images", "/Users/marshalikorawung/SplitBill_API/images")
+
+	//Debtor Bill
+	e.GET("/getDebtorBill", controllers.ReadDebtorBill)
+	e.POST("/createDebtorBill", controllers.CreateDebtorBill)
+	e.PATCH("/editDebtorBill", controllers.EditDebtorBill)
+	e.DELETE("/deleteDebtorBill", controllers.DeleteDebtorBill)
 
 	return e
 
