@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"net/http"
 	// "vp_week11_echo/helpers"
-	"vp_week11_echo/models"
+	"splitbill_api/models"
 )
 
 func ReadDebtorBill(c echo.Context) error {
