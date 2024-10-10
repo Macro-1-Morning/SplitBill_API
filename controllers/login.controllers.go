@@ -2,7 +2,7 @@ package controllers
 
 import(
 	"github.com/labstack/echo/v4"
-	"vp_week11_echo/helpers"
+	"splitbill_api/helpers"
 	// "vp_week11_echo/models"
 	"net/http"
 	// "github.com/dgrijalva/jwt-go"

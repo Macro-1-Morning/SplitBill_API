@@ -7,7 +7,7 @@ import (
 	"io"
 	"mime/multipart"
 	"os"
-	"vp_week11_echo/models"
+	"splitbill_api/models"
 )
 
 func ReadBillByBillId(c echo.Context) error {

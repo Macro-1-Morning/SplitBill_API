@@ -8,8 +8,8 @@ package main
 //go get github.com/labstack/echo/v4/middleware
 //go get github.com/go-playground/validator
 import (
-	"vp_week11_echo/routes"
-	"vp_week11_echo/db"
+	"splitbill_api/routes"
+	"splitbill_api/db"
 )
 
 func main() {

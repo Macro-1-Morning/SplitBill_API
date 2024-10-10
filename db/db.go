@@ -2,7 +2,7 @@ package db
 
 import(
 	"database/sql"
-	"vp_week11_echo/config"
+	"splitbill_api/config"
 	_"github.com/go-sql-driver/mysql"
 )
 
