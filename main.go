@@ -16,5 +16,4 @@ func main() {
 	db.Init()
 	e := routes.Init()
 	e.Logger.Fatal(e.Start("127.0.0.1:8080"))
-	//asnjkdnasjknd
 }
