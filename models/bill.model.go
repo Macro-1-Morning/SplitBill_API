@@ -1,7 +1,7 @@
 package models
 
 import (
-	"vp_week11_echo/db"
+	"splitbill_api/db"
 	//"encoding/json"
 	// "database/sql"
 	// "fmt"
