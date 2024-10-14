@@ -1,4 +1,4 @@
-module vp_week11_echo
+module splitbill_api
 
 go 1.23.2
 

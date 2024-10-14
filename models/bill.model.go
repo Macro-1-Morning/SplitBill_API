@@ -1,11 +1,7 @@
 package models
 
 import (
-	"vp_week11_echo/db"
-	//"encoding/json"
-	// "database/sql"
-	// "fmt"
-	// "vp_week11_echo/helpers"
+	"splitbill_api/db"
 	"github.com/go-playground/validator"
 	"net/http"
 )
@@ -21,12 +17,10 @@ type Bill struct {
 	Other           string `json:"other"`
 	Grand_Total     string `json:"grand_total"`
 	IsSettled       string `json:"isSettled"`
-	Date_Created    string `json:"date_created"`
 	Payment_Id      string `json:"payment_id"`
-	User_Id   		string `json:"user_id"`
 }
 
-func CreateBill(receipt_image string, restaurant_name string, subtotal string, total_discount string, service_charge string, tax string, other string, grand_total string, isSettled string, date_created string, payment_id string, user_id string) (Response, error) {
+func CreateBill(receipt_image string, restaurant_name string, subtotal string, total_discount string, service_charge string, tax string, other string, grand_total string, isSettled string, payment_id string) (Response, error) {
 	var res Response
 
 	v := validator.New()
@@ -41,9 +35,7 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 		Other:           other,
 		Grand_Total:     grand_total,
 		IsSettled:       isSettled,
-		Date_Created:    date_created,
 		Payment_Id:      payment_id,
-		User_Id: 		 user_id,
 	}
 
 	err := v.Struct(bill)
@@ -58,7 +50,7 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 
 	con := db.CreateCon()
 
-	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,date_created,payment_id, debtorbill_id, user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"
+	sqlStatement := "INSERT INTO bill(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total,isSettled,payment_id) VALUES (?,?,?,?,?,?,?,?,?,?)"
 
 	stmt, err := con.Prepare(sqlStatement)
 
@@ -71,7 +63,7 @@ func CreateBill(receipt_image string, restaurant_name string, subtotal string, t
 		return res, err
 	}
 
-	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id)
+	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, payment_id)
 
 	if err != nil {
 		return res, err
@@ -120,17 +112,17 @@ func DeleteBill(id string) (Response, error) {
 
 }
 
-func EditBill(id string, receipt_image string, restaurant_name string, subtotal string, total_discount string, service_charge string, tax string, other string, grand_total string, isSettled string, date_created string, payment_id string, user_id string) (Response, error) {
+func EditBill(id string, receipt_image string, restaurant_name string, subtotal string, total_discount string, service_charge string, tax string, other string, grand_total string, isSettled string, payment_id string) (Response, error) {
 	var res Response
 	con := db.CreateCon()
-	sqlStatement := "UPDATE bill SET receipt_image=?, restaurant_name=?, subtotal=?, total_discount=?, service_charge=?, tax=?, other=?, grand_total=?, isSettled=?, date_created=?, payment_id=?, user_id=? WHERE id=?"
+	sqlStatement := "UPDATE bill SET receipt_image=?, restaurant_name=?, subtotal=?, total_discount=?, service_charge=?, tax=?, other=?, grand_total=?, isSettled=?, payment_id=? WHERE id=?"
 	stmt, err := con.Prepare(sqlStatement)
 
 	if err != nil {
 		return res, err
 	}
 
-	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id, id)
+	result, err := stmt.Exec(receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, payment_id, id)
 
 	if err != nil {
 		return res, err
@@ -166,7 +158,7 @@ func ReadAllBill(id string)(Response, error){
 	}
  
 	for rows.Next(){
-		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Date_Created, &obj.Payment_Id, &obj.User_Id)
+		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Payment_Id)
 
 		if err != nil{
 			return res,err
@@ -194,7 +186,7 @@ func ReadBillByBillId(id string)(Response, error){
 		return res,err
 	}
 	for rows.Next(){
-		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Date_Created, &obj.Payment_Id, &obj.User_Id)
+		err = rows.Scan(&obj.Id, &obj.Receipt_Image, &obj.Restaurant_Name, &obj.Subtotal, &obj.Total_Discount, &obj.Service_Charge, &obj.Tax, &obj.Other, &obj.Grand_Total, &obj.IsSettled, &obj.Payment_Id)
 
 		if err != nil{
 			return res,err

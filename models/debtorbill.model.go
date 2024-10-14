@@ -1,11 +1,7 @@
 package models
 
 import (
-	"vp_week11_echo/db"
-	//"encoding/json"
-	// "database/sql"
-	// "fmt"
-	// "vp_week11_echo/helpers"
+	"splitbill_api/db"
 	"github.com/go-playground/validator"
 	"net/http"
 )
