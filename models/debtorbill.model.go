@@ -2,10 +2,6 @@ package models
 
 import (
 	"splitbill_api/db"
-	//"encoding/json"
-	// "database/sql"
-	// "fmt"
-	// "vp_week11_echo/helpers"
 	"github.com/go-playground/validator"
 	"net/http"
 )

@@ -3,7 +3,6 @@ package controllers
 import (
 	"github.com/labstack/echo/v4"
 	"net/http"
-	// "vp_week11_echo/helpers"
 	"io"
 	"mime/multipart"
 	"os"
@@ -57,10 +56,8 @@ func EditBill(c echo.Context) error {
 	other := c.FormValue("other")
 	grand_total := c.FormValue("grand_total")
 	isSettled := c.FormValue("isSettled")
-	date_created := c.FormValue("date_created")
 	payment_id := c.FormValue("payment_id")
-	user_id := c.FormValue("user_id")
-	result, err := models.EditBill(id, receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id)
+	result, err := models.EditBill(id, receipt_image, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, payment_id)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError,
@@ -79,9 +76,7 @@ func CreateBill(c echo.Context) error {
 	other := c.FormValue("other")
 	grand_total := c.FormValue("grand_total")
 	isSettled := c.FormValue("isSettled")
-	date_created := c.FormValue("date_created")
 	payment_id := c.FormValue("payment_id")
-	user_id := c.FormValue("user_id")
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, &models.Response{
@@ -100,7 +95,7 @@ func CreateBill(c echo.Context) error {
 	baseURL := "http://127.0.0.1:8080"
 	pictureURL := baseURL + "/images/" + receipt_image.Filename
 
-	result, err := models.CreateBill(pictureURL, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, date_created, payment_id, user_id)
+	result, err := models.CreateBill(pictureURL, restaurant_name, subtotal, total_discount, service_charge, tax, other, grand_total, isSettled, payment_id)
 
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError,
